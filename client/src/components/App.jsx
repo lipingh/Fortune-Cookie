@@ -1,24 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import FortuneCookie from './FortuneCookie.jsx';
+
 const App = () => {
-  const categories = ['all', 'computers', 'definitions', 'miscellaneous', 'people', 'science', 'wisdom'];
-  const [isOpen, setOpen] = useState({});
+  const [category, setCategory] = useState('all');
+  const [isOpen, setOpen] = useState(false);
+  const [message, setMessege] = useState('');
 
-  const handleClick = (category) => {
-    const newOpenState = { ...isOpen };
-    newOpenState[category] = !newOpenState[category];
-    setOpen(newOpenState);
-  };
-
-
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+    getFortuneCookieMessage(category);
+  }
+  const handleCategoryChange = (e) => {
+    console.log(e.target.value);
+    setCategory(e.target.value);
+  }
+  const getFortuneCookieMessage = (category) => {
+    axios.get('/fortune', { params: { category: category } })
+      .then((res) => {
+        console.log(res.data);
+        setMessege(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
   return (
     <div className="App">
-      <FortuneCookie isOpen={isOpen[categories[0]]} handleClick={() => handleClick(categories[0])} category={categories[0]} />
-      <FortuneCookie isOpen={isOpen[categories[1]]} handleClick={() => handleClick(categories[1])} category={categories[1]} />
-      <FortuneCookie isOpen={isOpen[categories[2]]} handleClick={() => handleClick(categories[2])} category={categories[2]} />
-      <FortuneCookie isOpen={isOpen[categories[3]]} handleClick={() => handleClick(categories[3])} category={categories[3]} />
-      <FortuneCookie isOpen={isOpen[categories[4]]} handleClick={() => handleClick(categories[4])} category={categories[4]} />
-      <FortuneCookie isOpen={isOpen[categories[5]]} handleClick={() => handleClick(categories[5])} category={categories[5]} />
+      <FortuneCookie isOpen={isOpen} handleClick={() => handleClick()} message={message} />
+      <div className="FortuneCookieMessageCategory">
+        <label>Choose a category:</label>
+        <select onChange={handleCategoryChange}>
+          <option value="all">ALL</option>
+          <option value="computers">COMPUTERS</option>
+          <option value="definitions">DIFINITIONS</option>
+          <option value="miscellaneous">MISCELLANEOUS</option>
+          <option value="people">PEOPLE</option>
+          <option value="science">SCIENCE</option>
+          <option value="wisdom">WISDOM</option>
+        </select>
+      </div>
     </div>
 
   );

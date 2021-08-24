@@ -35,7 +35,7 @@ Once the project moves into development, the press release can be used as a touc
   > Life is not easy, but life can be easy
 
 ## How to Get Started ##
-  > design and implement a few cards(e.g. 6), when a user click the fortune cookie, it would open the fortune cookie and show the e message. The fortune cookie messages can be stored in the mongodb
+  > design and implement a few cards(e.g. 6), when a user click the fortune cookie, it would open the fortune cookie and show the message. The fortune cookie messages can be stored in the mongodb or retrive from a api
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.

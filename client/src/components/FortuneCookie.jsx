@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
-const FortuneCookie = ({ isOpen, handleClick, category }) => {
-  console.log('isOpen', isOpen);
+
+const FortuneCookie = ({ isOpen, handleClick, message }) => {
   const classes = classnames({
     FortuneCookie: true,
     "FortuneCookie--open": isOpen
   });
+
   return (
     <>
       <div className={classes}>
@@ -14,19 +15,15 @@ const FortuneCookie = ({ isOpen, handleClick, category }) => {
           alt="Fortune Cookie"
           onClick={handleClick}
         />
-        {
-          isOpen && (
-            <div className="FortuneCookieMessage">
-              <p>A beautiful, smart, and loving person will be coming into your life</p>
-            </div>
-          )
-        }
-        <button className="fc-category" onClick={() => handleClick(category)}>
-          {category}
-        </button>
+
       </div>
-
-
+      {
+        isOpen && (
+          <div className="FortuneCookieMessage">
+            <p>{message}</p>
+          </div>
+        )
+      }
     </>
   );
 };
