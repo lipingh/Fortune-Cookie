@@ -6,29 +6,29 @@ const App = () => {
   const [category, setCategory] = useState('all');
   const [isOpen, setOpen] = useState(false);
   const [message, setMessege] = useState('');
-
+  const getFortuneCookieMessage = (name) => {
+    axios.get('/fortune', { params: { category: name } })
+      .then((res) => {
+        // console.log(res.data);
+        setMessege(res.data);
+      })
+      .catch((err) => { throw err; });
+  };
   const handleClick = () => {
     setOpen((prev) => !prev);
     getFortuneCookieMessage(category);
-  }
+  };
   const handleCategoryChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setCategory(e.target.value);
-  }
-  const getFortuneCookieMessage = (category) => {
-    axios.get('/fortune', { params: { category: category } })
-      .then((res) => {
-        console.log(res.data);
-        setMessege(res.data);
-      })
-      .catch((err) => console.log(err));
-  }
+  };
+
   return (
     <div className="App">
       <FortuneCookie isOpen={isOpen} handleClick={() => handleClick()} message={message} />
       <div className="FortuneCookieMessageCategory">
         <label>Choose a category:</label>
-        <select onChange={handleCategoryChange}>
+        <select onChange={handleCategoryChange} id="fc-category">
           <option value="all">ALL</option>
           <option value="computers">COMPUTERS</option>
           <option value="definitions">DIFINITIONS</option>
@@ -41,6 +41,6 @@ const App = () => {
     </div>
 
   );
-}
+};
 
 export default App;
