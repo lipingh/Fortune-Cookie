@@ -7,8 +7,8 @@ const MessageList = ({ cookies, handleDeleteMessage }) => (
     <div className="cookie-message-list-container">
       {cookies.map((cookie) => (
         <div key={cookie.message}>
-          &#129376;
-          {cookie.message}
+          <span>&#129376;</span>
+          <span className="cookie-message">{cookie.message}</span>
           <span
             role="button"
             tabIndex={0}

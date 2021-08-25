@@ -32,6 +32,8 @@ const FortuneCookie = ({
               <p>
                 <br />
                 {message}
+                <br />
+                {' '}
               </p>
             </div>
             <div className="share-like-buttons">
