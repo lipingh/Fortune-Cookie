@@ -29,9 +29,11 @@ const App = () => {
       .then((res) => setCookies(res.data))
       .catch((err) => { throw err; });
   };
+
   useEffect(() => {
     getAllFavMessages();
   }, []);
+
   return (
     <div className="App">
       <FortuneCookie

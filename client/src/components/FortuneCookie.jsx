@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
-const FortuneCookie = ({ isOpen, handleClick, message, category }) => {
+const FortuneCookie = ({
+  isOpen, handleClick, message, category,
+}) => {
   const classes = classnames({
     FortuneCookie: true,
     'FortuneCookie--open': isOpen,
   });
 
   const saveToMyFavorite = () => {
-    // console.log({ category, message });
     axios.post('/favorite', { category, message })
       .then()
       .catch((err) => { throw err; });
@@ -35,6 +37,13 @@ const FortuneCookie = ({ isOpen, handleClick, message, category }) => {
       }
     </>
   );
+};
+
+FortuneCookie.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  message: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 export default FortuneCookie;

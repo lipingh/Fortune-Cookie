@@ -1,7 +1,6 @@
 const Cookie = require('../models/cookie');
 
 const saveMessage = (cookie, callback) => {
-  console.log(cookie);
   const doc = new Cookie({
     category: cookie.category,
     message: cookie.message,

@@ -1,12 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MessageList = ({ cookies }) => (
   <div className="cookie-message-list">
-    <div>My Favorite Cookie Messages</div>
+    <div className="message-title">My Favorite Fortune Cookie Messages</div>
     <div className="cookie-message-list-container">
-      {cookies.map((cookie) => <div key={cookie._id}>{cookie.message}</div>)}
+      {cookies.map((cookie, index) => (
+        <div key={index}>
+          {cookie.message}
+        </div>
+      ))}
     </div>
   </div>
 );
+// MessageList.propTypes = {
+//   cookies: PropTypes.arrayOf({
+//     _id: PropTypes.string,
+//     category: PropTypes.string,
+//     message: PropTypes.string,
+//   }).isRequired,
+// };
 
 export default MessageList;
