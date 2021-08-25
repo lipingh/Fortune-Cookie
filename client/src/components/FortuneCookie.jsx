@@ -33,9 +33,10 @@ const FortuneCookie = ({
             </div>
             <div className="share-like-buttons">
               <img
-                role="button"
+                role="presentation"
                 src={like ? 'liked.png' : 'like.png'}
                 alt=""
+                aria-label="toggle like"
                 className="likeBtn"
                 onClick={saveToMyFavorite}
                 onKeyDown={() => { }}
