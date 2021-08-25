@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const MessageList = ({ cookies }) => (
   <div className="cookie-message-list">
-    <div className="message-title">My Favorite Fortune Cookie Messages</div>
+    <div className="message-title">&#129376; My Favorite Fortune Cookie Messages</div>
     <div className="cookie-message-list-container">
       {cookies.map((cookie, index) => (
         <div key={index}>
