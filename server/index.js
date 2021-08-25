@@ -1,14 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 
+const port = 3000;
+
+const db = require('../database/index.js');
 const { getMessgaeByCategory } = require('../helper/index');
+const { saveMessage, findAllCookieMessages } = require('../database/controller/cookie');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(express.static(`${__dirname}/../client/dist`));
 
-const port = 3000;
 app.get('/fortune', (req, res) => {
   // console.log(req.query.category);
   getMessgaeByCategory(req.query.category, (err, result) => {
@@ -20,7 +23,24 @@ app.get('/fortune', (req, res) => {
     }
   });
 });
-
+app.post('/favorite', (req, res) => {
+  // console.log(req.body);
+  saveMessage(req.body, (err) => {
+    if (err) {
+      res.sendStaus(400);
+    }
+    res.status(201).send('ok');
+  });
+});
+app.get('/favorite', (req, res) => {
+  findAllCookieMessages((err, result) => {
+    if (err) {
+      res.sendStaus(404);
+    }
+    console.log(result);
+    res.status(200).json(result);
+  });
+});
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });

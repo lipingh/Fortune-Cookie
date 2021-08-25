@@ -1,11 +1,16 @@
 const Cookie = require('../models/cookie');
 
-const saveMessage = (category, message) => {
+const saveMessage = (cookie, callback) => {
+  console.log(cookie);
   const doc = new Cookie({
-    category,
-    message,
+    category: cookie.category,
+    message: cookie.message,
   });
-  doc.save();
+  doc.save((err) => {
+    if (err) {
+      callback(err);
+    }
+  });
 };
 
 const findAllCookieMessages = (callback) => {
