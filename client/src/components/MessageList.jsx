@@ -6,18 +6,26 @@ const MessageList = ({ cookies }) => {
   const handleDeleteMessage = (cookie) => {
     // console.log(cookie);
     axios.delete('/favorite', { data: cookie })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then(() => true)
+      .catch((err) => { throw err; });
   };
   return (
     <div className="cookie-message-list">
       <div className="message-title">&#129376; My Favorite Fortune Cookie Messages</div>
       <div className="cookie-message-list-container">
-        {cookies.map((cookie, index) => (
-          <div key={index}>
+        {cookies.map((cookie) => (
+          <div key={cookie.message}>
             &#129376;
             {cookie.message}
-            <span className="dislike" onClick={() => handleDeleteMessage(cookie)}>&#128465;</span>
+            <span
+              role="button"
+              tabIndex={0}
+              onKeyDown={() => { }}
+              className="dislike"
+              onClick={() => handleDeleteMessage(cookie)}
+            >
+              &#128465;
+            </span>
           </div>
 
         ))}
@@ -26,12 +34,10 @@ const MessageList = ({ cookies }) => {
   );
 };
 
-// MessageList.propTypes = {
-//   cookies: PropTypes.arrayOf({
-//     _id: PropTypes.string,
-//     category: PropTypes.string,
-//     message: PropTypes.string,
-//   }).isRequired,
-// };
+MessageList.propTypes = {
+  cookies: PropTypes.arrayOf(PropTypes.shape({
+    message: PropTypes.string,
+  })).isRequired,
+};
 
 export default MessageList;

@@ -16,11 +16,17 @@ const FortuneCookie = ({
   });
 
   const saveToMyFavorite = () => {
-    if (like) return;
-    setLike(true);
-    axios.post('/favorite', { category, message })
-      .then()
-      .catch((err) => { throw err; });
+    if (like) {
+      axios.delete('/favorite', { data: { message } })
+        .then(() => true)
+        .catch((err) => { throw err; });
+    } else {
+      axios.post('/favorite', { category, message })
+        .then()
+        .catch((err) => { throw err; });
+    }
+
+    setLike((prev) => !prev);
   };
   return (
     <>
@@ -41,11 +47,14 @@ const FortuneCookie = ({
               <p>{message}</p>
             </div>
             <div className="share-like-buttons">
-              <img type="button" src="likeIcon.jpeg" className="likeBtn" onClick={saveToMyFavorite}>
-                {/* <span style={{ fontSize: '3rem' }}>
-                  <i className="fa fa-heart fa-lg" style={{ color: (like ? 'red' : 'grey') }} />
-                </span> */}
-              </img>
+              <img
+                role="button"
+                src={like ? 'liked.png' : 'like.png'}
+                alt=""
+                className="likeBtn"
+                onClick={() => { saveToMyFavorite() }}
+                onKeyDown={() => { }}
+              />
               <FacebookShareButton
                 url="https://www.google.com/"
                 hashtag="#fortuneCookies"
