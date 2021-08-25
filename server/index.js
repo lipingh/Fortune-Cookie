@@ -3,7 +3,8 @@ const cors = require('cors');
 
 const port = 3000;
 
-const db = require('../database/index');
+// const db = require('../database/index');
+require('../database/index');
 const { getMessgaeByCategory } = require('../helper/index');
 const { saveMessage, findAllCookieMessages, deleteCookieMessages } = require('../database/controller/cookie');
 

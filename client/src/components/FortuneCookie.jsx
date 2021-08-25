@@ -29,7 +29,10 @@ const FortuneCookie = ({
         isOpen && (
           <div>
             <div className="FortuneCookieMessage">
-              <p>{message}</p>
+              <p>
+                <br />
+                {message}
+              </p>
             </div>
             <div className="share-like-buttons">
               <img

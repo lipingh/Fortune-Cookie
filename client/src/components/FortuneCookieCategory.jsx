@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 const FortuneCookieCategory = ({ handleCategoryChange }) => (
   <div className="FortuneCookieMessageCategory">
-    Ask the Fortune Cookie About
+    <span>
+      Ask the Fortune Cookie About
+      {' '}
+    </span>
     <select onChange={handleCategoryChange} id="fc-category">
       <option value="all">ALL</option>
       <option value="computers">COMPUTERS</option>
