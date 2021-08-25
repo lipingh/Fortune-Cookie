@@ -7,6 +7,7 @@ const MessageList = ({ cookies }) => (
     <div className="cookie-message-list-container">
       {cookies.map((cookie, index) => (
         <div key={index}>
+          &#129376;
           {cookie.message}
         </div>
       ))}
