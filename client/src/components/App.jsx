@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FortuneCookie from './FortuneCookie.jsx';
@@ -37,7 +38,7 @@ const App = () => {
 
   const handleDeleteMessage = (cookie) => {
     axios.delete('/favorite', { data: cookie })
-      .then(() => setCookies((prev) => prev.filter((obj) => obj._id !== cookie._id)))
+      .then(() => setCookies((prev) => prev.filter((obj) => obj.message !== cookie.message)))
       .catch((err) => { throw err; });
   };
 
