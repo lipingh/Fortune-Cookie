@@ -37,7 +37,7 @@ const FortuneCookie = ({
                 src={like ? 'liked.png' : 'like.png'}
                 alt=""
                 className="likeBtn"
-                onClick={() => saveToMyFavorite()}
+                onClick={saveToMyFavorite}
                 onKeyDown={() => { }}
               />
               <FacebookShareButton

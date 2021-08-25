@@ -21,14 +21,16 @@ app.get('/fortune', (req, res) => {
     }
   });
 });
+
 app.post('/favorite', (req, res) => {
-  saveMessage(req.body, (err) => {
+  saveMessage(req.body, (err, result) => {
     if (err) {
       res.sendStatus(400);
     }
-    res.status(201).send('ok');
+    res.status(201).send(result);
   });
 });
+
 app.get('/favorite', (req, res) => {
   findAllCookieMessages((err, result) => {
     if (err) {

@@ -48,10 +48,11 @@ const App = () => {
         .catch((err) => { throw err; });
     } else {
       axios.post('/favorite', { category, message })
-        .then(() => setCookies((prev) => [...prev, { category, message }]))
+        .then((res) => {
+          setCookies((prev) => [...prev, res.data]);
+        })
         .catch((err) => { throw err; });
     }
-    console.log('like', like);
     setLike((prev) => !prev);
   };
 

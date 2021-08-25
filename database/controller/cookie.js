@@ -5,9 +5,12 @@ const saveMessage = (cookie, callback) => {
     category: cookie.category,
     message: cookie.message,
   });
-  doc.save((err) => {
+  doc.save((err, result) => {
     if (err) {
       callback(err);
+    } else {
+      // console.log(result);
+      callback(null, result);
     }
   });
 };
