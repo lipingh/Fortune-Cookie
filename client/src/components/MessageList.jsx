@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const MessageList = ({ cookies }) => {
-  const handleDeleteMessage = () => {
-
+  const handleDeleteMessage = (cookie) => {
+    // console.log(cookie);
+    axios.delete('/favorite', { data: cookie })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
   return (
     <div className="cookie-message-list">

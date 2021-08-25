@@ -21,4 +21,14 @@ const findAllCookieMessages = (callback) => {
     }
   });
 };
-module.exports = { saveMessage, findAllCookieMessages };
+
+const deleteCookieMessages = (cookie, callback) => {
+  Cookie.deleteOne(cookie, (err, doc) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, doc);
+    }
+  });
+};
+module.exports = { saveMessage, findAllCookieMessages, deleteCookieMessages };
