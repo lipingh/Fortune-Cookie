@@ -1,33 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classnames from 'classnames';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import {
   FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon,
 } from 'react-share';
 
 const FortuneCookie = ({
-  isOpen, handleClick, message, category,
+  isOpen, handleClick, message, saveToMyFavorite, like,
 }) => {
-  const [like, setLike] = useState(false);
   const classes = classnames({
     FortuneCookie: true,
     'FortuneCookie--open': isOpen,
   });
 
-  const saveToMyFavorite = () => {
-    if (like) {
-      axios.delete('/favorite', { data: { message } })
-        .then(() => true)
-        .catch((err) => { throw err; });
-    } else {
-      axios.post('/favorite', { category, message })
-        .then()
-        .catch((err) => { throw err; });
-    }
-
-    setLike((prev) => !prev);
-  };
   return (
     <>
       <div className={classes}>
@@ -52,7 +37,7 @@ const FortuneCookie = ({
                 src={like ? 'liked.png' : 'like.png'}
                 alt=""
                 className="likeBtn"
-                onClick={() => { saveToMyFavorite() }}
+                onClick={() => saveToMyFavorite()}
                 onKeyDown={() => { }}
               />
               <FacebookShareButton
@@ -84,7 +69,8 @@ FortuneCookie.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  saveToMyFavorite: PropTypes.func.isRequired,
+  like: PropTypes.bool.isRequired,
 };
 
 export default FortuneCookie;

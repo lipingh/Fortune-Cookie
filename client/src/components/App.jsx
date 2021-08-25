@@ -10,6 +10,8 @@ const App = () => {
   const [isOpen, setOpen] = useState(false);
   const [message, setMessege] = useState('');
   const [cookies, setCookies] = useState([]);
+  const [like, setLike] = useState(false);
+
   const getFortuneCookieMessage = (name) => {
     axios.get('/fortune', { params: { category: name } })
       .then((res) => {
@@ -33,6 +35,26 @@ const App = () => {
       .catch((err) => { throw err; });
   };
 
+  const handleDeleteMessage = (cookie) => {
+    axios.delete('/favorite', { data: cookie })
+      .then(() => setCookies((prev) => prev.filter((obj) => obj._id !== cookie._id)))
+      .catch((err) => { throw err; });
+  };
+
+  const saveToMyFavorite = () => {
+    if (like) {
+      axios.delete('/favorite', { data: { message } })
+        .then(() => setCookies((prev) => prev.filter((obj) => obj.message !== message)))
+        .catch((err) => { throw err; });
+    } else {
+      axios.post('/favorite', { category, message })
+        .then(() => setCookies((prev) => [...prev, { category, message }]))
+        .catch((err) => { throw err; });
+    }
+    console.log('like', like);
+    setLike((prev) => !prev);
+  };
+
   useEffect(() => {
     getAllFavMessages();
   }, []);
@@ -44,14 +66,16 @@ const App = () => {
         <div className="FortuneCookie-container">
           <FortuneCookie
             isOpen={isOpen}
-            handleClick={() => handleClick()}
+            handleClick={handleClick}
             message={message}
             category={category}
+            like={like}
+            saveToMyFavorite={saveToMyFavorite}
           />
           <FortuneCookieCategory handleCategoryChange={handleCategoryChange} />
         </div>
       </div>
-      <MessageList cookies={cookies} />
+      <MessageList cookies={cookies} handleDeleteMessage={handleDeleteMessage} />
     </div>
 
   );
