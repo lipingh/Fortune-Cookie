@@ -14,7 +14,7 @@ https://user-images.githubusercontent.com/25859716/131543962-c8e123ec-cbbc-4980-
 - Mongoose
 
 ## Get Started
-```git clone```\
+```git clone``` the repo\
 ```npm install```\
 ```npn run react-dev```\
 ```npm start```
